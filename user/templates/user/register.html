@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-
+{%load crispy_forms_tags %} 
 {% block content %}
     <div class="content-section">
         <form method="POST">
             <fieldset class="form-group">
                 <legend class="border-bottom mb-3">Join us today</legend>
             {% csrf_token %}
-            {{form}}
+            {{form|crispy}}
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info">Register</button>
