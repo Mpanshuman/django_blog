@@ -1,5 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-    register
+    <div class="content-section">
+        <form method="POST">
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-3">Join us today</legend>
+            {% csrf_token %}
+            {{form}}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info">Register</button>
+            </div>
+        </form>
+        <div class="border-top pt-3 mt-2">
+            <small class="text-muted">Aleady have an account? <a class="ml-2" href="{% url 'user-login' %}">Sign In</a></small>
+        </div>
+    </div>
 {% endblock content %}
