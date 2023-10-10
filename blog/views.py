@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from .models import Post
-
+from django.views.generic import CreateView,UpdateView,DeleteView,ListView,DetailView
 # Create your views here.
 
-
+class PostDetailView(DetailView):
+    model = Post
 def index(request):
     posts = Post.objects.all()
     context = {"posts": posts}
