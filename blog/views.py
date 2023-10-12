@@ -1,5 +1,7 @@
-from django.shortcuts import render
-from .models import Post
+from typing import Any
+from django.db.models.query import QuerySet
+from django.shortcuts import render, get_list_or_404
+from .models import Post, User
 from django.views.generic import (
     CreateView,
     UpdateView,
@@ -56,6 +58,17 @@ class BlogListView(ListView):
     context_object_name = "posts"
     ordering = ["-created_at"]
     paginate_by = 2
+
+class UserPostListView(ListView):
+    model = Post
+    template_name = "blog/user_posts.html"
+    context_object_name = "posts"
+    paginate_by = 2
+
+    def get_queryset(self):
+        user = get_list_or_404(User, username=self.kwargs.get("username"))[0].id
+        return Post.objects.filter(author_id=user).order_by("-created_at")
+
 def index(request):
     posts = Post.objects.all()
     context = {"posts": posts}
