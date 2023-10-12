@@ -50,7 +50,11 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         else:
             return False
 
-
+class BlogListView(ListView):
+    model = Post
+    template_name = "blog/index.html"
+    context_object_name = "posts"
+    ordering = ["-created_at"]
 def index(request):
     posts = Post.objects.all()
     context = {"posts": posts}
