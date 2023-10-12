@@ -55,6 +55,7 @@ class BlogListView(ListView):
     template_name = "blog/index.html"
     context_object_name = "posts"
     ordering = ["-created_at"]
+    paginate_by = 2
 def index(request):
     posts = Post.objects.all()
     context = {"posts": posts}
